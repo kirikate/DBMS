@@ -1,0 +1,43 @@
+User(MtM with product, OtM with orders, MtM with Adress):
++first_name: NCHAR(20) NOT_NULL
++last_name: NCHAR(20) NOT_NULL
++password: #$^&* NOT_NULL
++email: NCHAR(100) UNIQUE NOT_NULL
++cart: products NULL
++orders: orders NULL
++role: CHAR(10)
++phone: CHAR(9)
+
+Order(MtM with Product):
++products: products
++user
++dateOfOrder: DATETIME
++dateOfDelivery: DATETIME
++price: INT CHECK(price >= 0)
++coupons: coupon
+
+Product:
++name:NCHAR(30) NOT_NULL
++type: NCHAR(30) NOT_NULL
++price: INT NOT_NULL
++size: NULL
++ingridients: NCHAR(100)
+
+Review
++user
++date: DATETIME
++dateOfUpdate: DATETIME NULL
++text:NVARCHAR(1000)
+
+Coupon:
++number: INT
++products
++price: INT
++dateOfStart: DATE
++dateOfInspiration: DATE
+
+Adress:
++adress:NVARCHAR(200)
++home: CHAR(10)
++entrance: NVARCHAR(10)
++number: CHAR(10)

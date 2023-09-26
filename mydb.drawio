@@ -1,0 +1,180 @@
+<mxfile host="app.diagrams.net" modified="2023-09-26T20:40:59.153Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 OPR/102.0.0.0" etag="TA2DO6QwNazLteB7nLQJ" version="21.8.2" type="device">
+  <diagram name="Страница — 1" id="j8NeaPQq4FaoW0YNu0MQ">
+    <mxGraphModel dx="1345" dy="733" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="s82BNTiHbq3g5wNBVeE_-1" value="Client" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="500" y="80" width="160" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="s82BNTiHbq3g5wNBVeE_-2" value="+ first_name&lt;br&gt;+ last_name&lt;br&gt;+ password&lt;br&gt;+ email&lt;br&gt;+ cart&lt;br&gt;+ orders&lt;br&gt;+ role&lt;br&gt;+ phone&lt;br&gt;+adresses" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="s82BNTiHbq3g5wNBVeE_-1" vertex="1">
+          <mxGeometry y="30" width="160" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-1" value="" style="fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;edgeStyle=elbowEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="GTcmixg37_vYdclQBQrY-4" target="s82BNTiHbq3g5wNBVeE_-1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="320" y="310" as="sourcePoint" />
+            <mxPoint x="360" y="475" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="320" y="395" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-2" value="Contains" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-1">
+          <mxGeometry x="0.7255" y="-1" relative="1" as="geometry">
+            <mxPoint x="-3" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-3" value="Included" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-1">
+          <mxGeometry x="-0.7037" y="-1" relative="1" as="geometry">
+            <mxPoint y="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-4" value="Order" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="260" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-5" value="+products&lt;br&gt;+dateOfOrder&lt;br&gt;+dateOfDelivery&lt;br&gt;+price&lt;br&gt;+coupons&lt;br&gt;+adress" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="GTcmixg37_vYdclQBQrY-4">
+          <mxGeometry y="30" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-8" value="Product" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="450" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-9" value="+name&lt;br&gt;+type&lt;br&gt;+price&lt;br&gt;+size&lt;br&gt;+ingridients" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="GTcmixg37_vYdclQBQrY-8">
+          <mxGeometry y="30" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-10" value="" style="fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;edgeStyle=elbowEdgeStyle;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="GTcmixg37_vYdclQBQrY-8" target="s82BNTiHbq3g5wNBVeE_-2">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="514" y="450" as="sourcePoint" />
+            <mxPoint x="694" y="410" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="580" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-11" value="Contains" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-10">
+          <mxGeometry x="0.7255" y="-1" relative="1" as="geometry">
+            <mxPoint x="-3" y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-12" value="Included" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-10">
+          <mxGeometry x="-0.7037" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-14" value="" style="fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;edgeStyle=elbowEdgeStyle;entryX=0.999;entryY=0.452;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryPerimeter=0;" edge="1" parent="1" source="GTcmixg37_vYdclQBQrY-8" target="GTcmixg37_vYdclQBQrY-5">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="290" y="545" as="sourcePoint" />
+            <mxPoint x="410" y="350" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="450" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-15" value="Contains" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-14">
+          <mxGeometry x="0.7255" y="-1" relative="1" as="geometry">
+            <mxPoint x="-3" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-16" value="Included" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-14">
+          <mxGeometry x="-0.7037" y="-1" relative="1" as="geometry">
+            <mxPoint y="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-20" value="Coupon" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="660" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-21" value="+number&lt;br&gt;+products&lt;br&gt;+price&lt;br&gt;+dateOfStart&lt;br&gt;+dtaeOfInspiration" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="GTcmixg37_vYdclQBQrY-20">
+          <mxGeometry y="30" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-22" value="" style="fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;edgeStyle=elbowEdgeStyle;entryX=0.449;entryY=1.031;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryPerimeter=0;" edge="1" parent="1" source="GTcmixg37_vYdclQBQrY-20" target="GTcmixg37_vYdclQBQrY-5">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="430" y="716" as="sourcePoint" />
+            <mxPoint x="330" y="535" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="312" y="500" />
+              <mxPoint x="380" y="536" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-23" value="Contains" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-22">
+          <mxGeometry x="0.7255" y="-1" relative="1" as="geometry">
+            <mxPoint x="-3" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-24" value="Included" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-22">
+          <mxGeometry x="-0.7037" y="-1" relative="1" as="geometry">
+            <mxPoint y="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-25" value="Review" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="120" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-26" value="+user&lt;br&gt;+date&lt;br&gt;+dateOfUpdate&lt;br&gt;+text" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="GTcmixg37_vYdclQBQrY-25">
+          <mxGeometry y="30" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-27" value="Adress" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="10" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-28" value="+adress&lt;br&gt;+home&lt;br&gt;+entrance&lt;br&gt;+number&lt;br&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="GTcmixg37_vYdclQBQrY-27">
+          <mxGeometry y="30" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-29" value="" style="fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;edgeStyle=elbowEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1.005;exitY=0.371;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="GTcmixg37_vYdclQBQrY-28">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="324" y="225" as="sourcePoint" />
+            <mxPoint x="504" y="130" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="324" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-30" value="Contains" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-29">
+          <mxGeometry x="0.7255" y="-1" relative="1" as="geometry">
+            <mxPoint x="-3" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-31" value="Included" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-29">
+          <mxGeometry x="-0.7037" y="-1" relative="1" as="geometry">
+            <mxPoint y="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-32" value="" style="fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;edgeStyle=elbowEdgeStyle;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="GTcmixg37_vYdclQBQrY-28" target="GTcmixg37_vYdclQBQrY-5">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="50" y="435" as="sourcePoint" />
+            <mxPoint x="230" y="340" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="180" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-33" value="Contains" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-32">
+          <mxGeometry x="0.7255" y="-1" relative="1" as="geometry">
+            <mxPoint x="-3" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-34" value="Included" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-32">
+          <mxGeometry x="-0.7037" y="-1" relative="1" as="geometry">
+            <mxPoint y="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-35" value="" style="fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;edgeStyle=elbowEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1.014;exitY=0.417;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="s82BNTiHbq3g5wNBVeE_-2" target="GTcmixg37_vYdclQBQrY-26">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="660" y="435" as="sourcePoint" />
+            <mxPoint x="840" y="340" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="700" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-36" value="Contains" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-35">
+          <mxGeometry x="0.7255" y="-1" relative="1" as="geometry">
+            <mxPoint x="-3" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GTcmixg37_vYdclQBQrY-37" value="Included" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GTcmixg37_vYdclQBQrY-35">
+          <mxGeometry x="-0.7037" y="-1" relative="1" as="geometry">
+            <mxPoint y="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
