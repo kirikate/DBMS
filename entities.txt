@@ -1,4 +1,5 @@
-User(MtM with product, OtM with orders, MtM with Adress):
+User(MtM with product, OtM with orders, MtM with Adress, OtO with Review):
++id: BIGINT PRIMARY KEY
 +first_name: NCHAR(20) NOT_NULL
 +last_name: NCHAR(20) NOT_NULL
 +password: #$^&* NOT_NULL
@@ -7,37 +8,59 @@ User(MtM with product, OtM with orders, MtM with Adress):
 +orders: orders NULL
 +role: CHAR(10)
 +phone: CHAR(9)
++adresses
 
-Order(MtM with Product):
-+products: products
-+user
+UsersToAdresses:
++user REFERENCE(id)
++adress REFERENCE(id)
+
+OrdersToProducts
+order: REFERENCE Order(id) NOT_NULL
+Product: REFERENCE Product(id) NOT_NULL
+count: INT NOT_NULL
+
+OrdersToCoupons
+order: REFERENCE Order(id)
+Coupon: REFEFRENCE Coupon(id)
+count: INT NOT_NULL
+
+Order(MtM with Product, MtM with Coupons):
++id: BIGINT PRIMARY KEY
++user: REFERENCE User(id)
 +dateOfOrder: DATETIME
 +dateOfDelivery: DATETIME
 +price: INT CHECK(price >= 0)
-+coupons: coupon
++addresses: REFERENCE Address(id)
 
 Product:
++id: BIGINT PRIMARY KEY
 +name:NCHAR(30) NOT_NULL
 +type: NCHAR(30) NOT_NULL
 +price: INT NOT_NULL
-+size: NULL
++size: CHAR(3) NULL
 +ingridients: NCHAR(100)
 
 Review
-+user
++id: BIGINT PRIMARY KEY
++user: References User(id)
 +date: DATETIME
 +dateOfUpdate: DATETIME NULL
 +text:NVARCHAR(1000)
 
-Coupon:
+Coupon (MtM with products):
++id: BIGINT PRIMARY KEY
 +number: INT
-+products
 +price: INT
 +dateOfStart: DATE
 +dateOfInspiration: DATE
 
+ProductsToCoupons:
++Coupon: REFERENCE Coupon(id)
++Product: Reference Product(id)
++count: INT
+
 Adress:
++id: BIGINT PRIMARY KEY
 +adress:NVARCHAR(200)
-+home: CHAR(10)
 +entrance: NVARCHAR(10)
 +number: CHAR(10)
