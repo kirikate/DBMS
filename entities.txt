@@ -15,14 +15,14 @@ UsersToAdresses:
 +adress REFERENCE(id)
 
 OrdersToProducts
-order: REFERENCE Order(id) NOT_NULL
-Product: REFERENCE Product(id) NOT_NULL
-count: INT NOT_NULL
++order: REFERENCE Order(id) NOT_NULL
++Product: REFERENCE Product(id) NOT_NULL
++count: INT NOT_NULL
 
 OrdersToCoupons
-order: REFERENCE Order(id)
-Coupon: REFEFRENCE Coupon(id)
-count: INT NOT_NULL
++order: REFERENCE Order(id)
++Coupon: REFEFRENCE Coupon(id)
++count: INT NOT_NULL
 
 Order(MtM with Product, MtM with Coupons):
 +id: BIGINT PRIMARY KEY
