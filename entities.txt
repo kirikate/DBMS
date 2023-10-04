@@ -71,4 +71,4 @@ Adress:
 +id: BIGINT PRIMARY KEY
 +adress:NVARCHAR(200)
 +entrance: NVARCHAR(10)
-+number: CHAR(10)
++number: CHAR(10)   
