@@ -4,8 +4,6 @@ User(MtM with product, OtM with orders, MtM with Adress, OtO with Review):
 +last_name: NCHAR(20) NOT_NULL
 +password: #$^&* NOT_NULL
 +email: NCHAR(100) UNIQUE NOT_NULL
-+cart: products NULL
-+orders: orders NULL
 +role: CHAR(10)
 +phone: CHAR(9)
 +adresses
@@ -24,13 +22,23 @@ OrdersToCoupons
 +Coupon: REFEFRENCE Coupon(id)
 +count: INT NOT_NULL
 
+ProductsToUsersCart:
++userid: REFERRENCE(Users)
++Product: REFERENCE(Product)
++Count: INT NOT_NULL
+
+CouponsToUsersCart:
++userid: REFERRENCE(Users)
++Couponid: REFERENCE(Coupons)
++Count: INT NOT_NULL
+
 Order(MtM with Product, MtM with Coupons):
 +id: BIGINT PRIMARY KEY
 +user: REFERENCE User(id)
 +dateOfOrder: DATETIME
 +dateOfDelivery: DATETIME
 +price: INT CHECK(price >= 0)
-+addresses: REFERENCE Address(id)
++addresse: REFERENCE Address(id)
 
 Product:
 +id: BIGINT PRIMARY KEY
