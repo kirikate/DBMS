@@ -38,7 +38,7 @@ Order(MtM with Product, MtM with Coupons):
 +dateOfOrder: DATETIME
 +dateOfDelivery: DATETIME
 +price: INT CHECK(price >= 0)
-+addresse: REFERENCE Address(id)
++address: REFERENCE Address(id)
 
 Product:
 +id: BIGINT PRIMARY KEY

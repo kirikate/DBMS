@@ -1,0 +1,1 @@
+SELECT * FROM Products WHERE name NOT LIKE N'[А-И]%' and [type] IN (N'Пицца', N'Соусы')

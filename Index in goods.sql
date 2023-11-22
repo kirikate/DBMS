@@ -1,0 +1,1 @@
+CREATE INDEX GoodsByProduct ON Goods(productId)

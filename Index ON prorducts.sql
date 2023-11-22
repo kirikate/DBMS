@@ -1,0 +1,1 @@
+CREATE INDEX ProductsByType ON Products(type)
