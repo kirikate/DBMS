@@ -1,0 +1,13 @@
+@model DbmsApp.Controllers.AuthController.LoginModel
+<div>
+    <h1>Вход</h1>
+    <form method="post">
+        <label asp-for="Email"></label>
+        <input asp-for="Email"/>
+        <br/>
+        <label asp-for="Password"></label>
+        <input asp-for="Password"/>
+        <br/>
+        <button type="submit">Войти</button>
+    </form>
+</div>

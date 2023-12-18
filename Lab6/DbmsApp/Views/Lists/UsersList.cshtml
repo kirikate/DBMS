@@ -1,0 +1,8 @@
+@model IEnumerable<DbmsApp.Models.User>
+
+@foreach (var it in Model)
+{
+    <p>id = @it.Id</p>
+    <p>first name =  @it.FirstName</p>
+    <p>last_name = @it.LastName</p>
+}
