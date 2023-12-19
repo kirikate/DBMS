@@ -1,0 +1,11 @@
+@model IEnumerable<DbmsApp.Models.Good>
+@foreach (var good in Model)
+{
+    <p>@good.Product?.Name </p>
+    <p>@good.Size</p>
+    <p>@good.Price $</p>
+    <p>@good.Product?.Ingredients</p>
+    <p><a asp-controller="Catalog" asp-action="AddToCart" asp-route-id="@good.Id">Добавить</a></p>
+    <br/>
+}
+

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DbmsApp.Models;
 
 public partial class Order
 {
+    [Key]
     public long Id { get; set; }
 
     public long UserId { get; set; }

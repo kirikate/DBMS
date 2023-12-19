@@ -1,0 +1,38 @@
+@model (List<(DbmsApp.Models.Good, int)>, List<(DbmsApp.Models.Coupon, int)>)
+
+@foreach ((var good, var count) in Model.Item1)
+{
+    <p>@good.Product?.Name </p>
+    <p>@good.Size</p>
+    <p>@good.Price $</p>
+    <p>@good.Product?.Ingredients</p>
+    <p>@count</p>
+    <p>
+        <a asp-controller="Cart" asp-action="AddOneProductTo" asp-route-id="@good.Id">Увеличить</a>
+        <a asp-controller="Cart" asp-action="RemoveOneProduct" asp-route-id="@good.Id">Уменьшить</a>
+        <a asp-controller="Cart" asp-action="ClearOneProduct" asp-route-id="@good.Id">Убрать</a>
+    </p>
+    <br/>
+}
+
+@foreach ((var coup, var count) in Model.Item2)
+{
+    <p>@coup.Number </p>
+    <p>@coup.Price</p>
+    <p>@count</p>
+    <br/>
+}
+
+<form method="post">
+    <label for="address">Адрес</label>
+    <input name="address" type="text"/>
+    <br/>
+    <label for="entrance">Адрес</label>
+    <input name="entrance" type="text"/>
+    <br/>
+    <label for="number">Адрес</label>
+    <input name="number" type="text"/>
+    <br/>
+    <button type="submit">Заказать</button>
+    
+</form>

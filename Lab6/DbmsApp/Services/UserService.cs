@@ -8,25 +8,35 @@ public class UserService: IUserService
 {
 	public User? CurrentUser { get; private set; }
 
-	private List<(Product prod, int count)> _prods = new();
-	private List<(Coupon coup, int count)> _coups = new();
+	private Dictionary<long, int> _goods = new();
+	private Dictionary<long, int> _coups = new();
 
-	public IEnumerable<(Product prod, int count)> ProdsInCart => _prods;
+	public Dictionary<long, int> GoodsInCart
+	{
+		get => _goods;
+		set => _goods = value;
+	}
 
-	public IEnumerable<(Coupon coup, int count)> CouponsInCart => _coups;
+	public Dictionary<long, int> CouponsInCart
+	{
+		get => _coups;
+		set => _coups = value;
+	}
+
 	public bool IsAdmin => CurrentUser?.Role == "ADM";
+	public bool IsStaff => CurrentUser?.Role != "USR";
 
 	//private readonly PizzaPlaceContext _db;
 
 	public bool Login(string email, int password, PizzaPlaceContext db)
 	{
-		
+		//CHANGE
 		User? usr = db.Users.FirstOrDefault(usr => usr.Email == email && usr.Password == password);
 		if (usr is null) return false;
 
 		CurrentUser = usr;
-		_prods.Clear();
-		_coups.Clear();
+		//_goods.Clear();
+		//_coups.Clear();
 
 		return true;
 	}
@@ -34,7 +44,7 @@ public class UserService: IUserService
 	public void Logout()
 	{
 		CurrentUser = null;
-		_prods.Clear();
+		_goods.Clear();
 		_coups.Clear();
 	}
 
@@ -48,7 +58,7 @@ public class UserService: IUserService
 		db.SaveChanges();
 		
 		CurrentUser = user;
-		_prods.Clear();
+		_goods.Clear();
 		_coups.Clear();
 		return true;
 	}

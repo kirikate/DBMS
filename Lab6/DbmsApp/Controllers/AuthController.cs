@@ -1,8 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using DbmsApp.Context;
 using DbmsApp.Services;
+using DbmsApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
+using AutoMapper;
 
 namespace DbmsApp.Controllers;
 
@@ -51,6 +54,27 @@ public class AuthController : Controller
 		[Required]
 		public string Password { get; set; }
 	}
+
+	public class RegisterModel
+	{
+		[Required]
+		[Display(Name = "Имя")]
+		public string FirstName { get; set; } = null!;
+
+		[Required]
+		[Display(Name = "Фамилия")]
+		public string LastName { get; set; } = null!;
+		
+		[Required]
+		[RegularExpression(@"[A-Za-z0-9]{8,}")]
+		[Display(Name="Пароль")]
+		public string Password { get; set; }
+		
+		[Required]
+		public string Email { get; set; } = null!;
+		
+		public string? Phone { get; set; }
+	}
 	
 	[HttpGet]
 	public IActionResult Login()
@@ -64,7 +88,7 @@ public class AuthController : Controller
 		if (!ModelState.IsValid) return Redirect("/auth/login");
 		
 		var res = _us.Login(lm.Email, Hashie(lm.Password), _db);
-		if (!res) return Redirect("/auth/login");
+		if (!res) return View();
 
 		return Redirect("/");
 	}
@@ -79,5 +103,25 @@ public class AuthController : Controller
 	public IActionResult Register()
 	{
 		return View();
+	}
+
+	[HttpPost]
+	public IActionResult Register(RegisterModel rm)
+	{
+		MapperConfiguration config = new MapperConfiguration(opt=>
+		{
+			opt.CreateMap<RegisterModel, User>().ForMember(dest => dest.Password, opt =>
+			{
+				opt.MapFrom(src => Hashie(src.Password));
+			});
+		});
+		Mapper mapper = new Mapper(config);
+
+		var usr = mapper.Map<User>(rm);
+		usr.Role = "USR";
+		var res = _us.Register(usr, _db);
+		if (!res) return View();
+
+		return Redirect("/");
 	}
 }

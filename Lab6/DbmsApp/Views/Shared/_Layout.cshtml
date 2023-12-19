@@ -5,7 +5,7 @@
     ViewBag.Title = "DefaultTitle";
     var us = Context.RequestServices.GetService<IUserService>();
     string username = "";
-    if(us.CurrentUser != null ) username = us.CurrentUser.FirstName + us.CurrentUser.LastName;
+    if(us.CurrentUser != null ) username = us.CurrentUser.FirstName + " " + us.CurrentUser.LastName;
 }
 <html>
 <head>
@@ -14,10 +14,13 @@
 <body>
 <nav>
     <a asp-controller="Home" asp-action="Index"> Главная </a> |
-    <a asp-controller="Lists" asp-action="UsersList">Список Пользователей</a>
+    <a asp-controller="Catalog" asp-action="Index">Каталог</a>
+    <a asp-controller="Lists" asp-action="UsersList">Список Пользователей</a> | 
+    <a asp-controller="Cart" asp-action="Index">Корзина</a>
+    <a asp-controller="Orders" asp-action="Index">Заказы</a>
     @if (username.IsNullOrEmpty())
     {
-        <a asp-controller="Auth" asp-action="Login">Вход</a>
+        <a asp-controller="Auth" asp-action="Login">Вход</a> 
         <a asp-controller="Auth" asp-action="Register">Регистрация</a>
     }
     else

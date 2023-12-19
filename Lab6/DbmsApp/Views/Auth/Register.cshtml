@@ -1,4 +1,22 @@
-
+@model DbmsApp.Controllers.AuthController.RegisterModel
 <div>
     <h1>Регистрация</h1>
+    <form method="post">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName"/>
+        <br/>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName"/>
+        <br/>
+        <label asp-for="Email"></label>
+        <input asp-for="Email"/>
+        <br/>
+        <label asp-for="Password"></label>
+        <input asp-for="Password"/>
+        <br/>
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone"/>
+        <br/>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
 </div>
