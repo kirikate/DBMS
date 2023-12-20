@@ -84,17 +84,24 @@ public class CartController : Controller
 		};
 		
 		//CHANGE
-		var ent = _db.Addresses.Add(addr);
+		_db.Database.ExecuteSqlRaw(
+			$"INSERT INTO Addresses(adress, entrance, number, userId) " + 
+			$"VALUES({addr.Adress}, {addr.Entrance}, {addr.Number}, {_us.CurrentUser.Id})");
 		_db.SaveChanges();
-		Console.WriteLine($"id of new address {ent.Entity.Id}");
+		var smth = _db.Addresses.First(addr => addr.UserId == _us.CurrentUser.Id && addr.Adress == address);
+		Console.WriteLine($"id of new address {smth.Id}");
 		var ordr = new Order()
 		{
-			AddressId = ent.Entity.Id,
+			AddressId = smth.Id,
 			DateOfOrder = DateTime.Now,
 			UserId = _us.CurrentUser.Id
 		};
 		
 		var eo = _db.Orders.Add(ordr);
+		_db.Logs.Add(new Log()
+		{
+			Logg = $"{DateTime.Now} - INSERT INTO ORDERS usr {_us.CurrentUser.Id} Address N{smth.Id} IN Post Order"
+		});
 		_db.SaveChanges();
 		Console.WriteLine("Is there anybody here...");
 		Console.WriteLine($"id of new order is {eo.Entity.Id}");
@@ -107,9 +114,12 @@ public class CartController : Controller
 			// 	Count = count
 			// };
 
-			_db.GoodsToOrders.FromSqlRaw($"INSERT INTO GoodsToOrders(orderId, productId, count) " +
+			_db.Database.ExecuteSqlRaw($"INSERT INTO GoodsToOrders(orderId, productId, count) " +
 									$"VALUES ({eo.Entity.Id}, {goodId}, {count})");
-			
+			_db.Logs.Add(new Log()
+			{
+				Logg = $"{DateTime.Now} - INSERT INTO GoodsToOrders {eo.Entity.Id}, {goodId}, {count} IN Post Order"
+			});
 		}
 
 		_db.SaveChanges();

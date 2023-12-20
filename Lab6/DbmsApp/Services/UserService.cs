@@ -1,6 +1,7 @@
 using System.Collections;
 using DbmsApp.Context;
 using DbmsApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DbmsApp.Services;
 
@@ -31,7 +32,12 @@ public class UserService: IUserService
 	public bool Login(string email, int password, PizzaPlaceContext db)
 	{
 		//CHANGE
-		User? usr = db.Users.FirstOrDefault(usr => usr.Email == email && usr.Password == password);
+		User? usr = db.Users.FromSqlRaw($"SELECT * FROM Users WHERE email=N'{email}' AND password={password}").First();
+		db.Logs.Add(new Log()
+		{
+			Logg = $"{DateTime.Now} - SELECT FROM USERS FOR LOGIN {email}"
+		});
+		db.SaveChanges();
 		if (usr is null) return false;
 
 		CurrentUser = usr;
@@ -50,11 +56,15 @@ public class UserService: IUserService
 
 	public bool Register(User user, PizzaPlaceContext db)
 	{
-		User? usr = db.Users.FirstOrDefault(usr => usr.Email == user.Email);
+		User? usr = db.Users.FromSqlRaw($"SELECT * FROM Users WHERE email=N'{user.Email}' AND password={user.Password}").First();
 		if (usr != null) return false;
 
 		//CHANGE
 		db.Users.Add(user);
+		db.Logs.Add(new Log()
+		{
+			Logg = $"{DateTime.Now} - INSERT INTO Users object {user.Email} {user.FirstName} {user.LastName}"
+		});
 		db.SaveChanges();
 		
 		CurrentUser = user;

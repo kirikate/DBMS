@@ -1,4 +1,5 @@
 using DbmsApp.Context;
+using DbmsApp.Models;
 using DbmsApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +28,10 @@ public class OrdersController : Controller
 		// Console.WriteLine($"UPDATE Orders SET dateOfDelivery = DATETIMEFROMPARTS(" +
 		// 				$"{now.ToValues()}) FROM Orders WHERE id = {id}");
 		
-		
+		_db.Logs.Add(new Log()
+		{
+			Logg = $"{DateTime.Now} - ORDER N {id} IS CLOSED"
+		});
 		_db.SaveChanges();
 		return RedirectToAction("Index");
 	}

@@ -1,6 +1,8 @@
 using DbmsApp.Context;
+using DbmsApp.Models;
 using DbmsApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 
 namespace DbmsApp.Controllers;
@@ -27,8 +29,14 @@ public class CatalogController : Controller
 		var ls = _db.Goods.ToList();
 		foreach(var it in ls)
 		{
-			it.Product = _db.Products.Find(it.ProductId);
+			it.Product = _db.Products.FromSqlRaw($"SELECT * FROM Products WHERE id = {it.ProductId}").First();
 		}
+		
+		_db.Logs.Add(new Log()
+		{
+			Logg = $"{DateTime.Now} - SELECT FROM GOODS FOR CATALOG"
+		});
+		_db.SaveChanges();
 		return View(ls);
 	}
 	

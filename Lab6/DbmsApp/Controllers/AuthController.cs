@@ -118,7 +118,7 @@ public class AuthController : Controller
 		Mapper mapper = new Mapper(config);
 
 		var usr = mapper.Map<User>(rm);
-		usr.Role = "USR";
+		usr.Role = "usr";
 		var res = _us.Register(usr, _db);
 		if (!res) return View();
 
