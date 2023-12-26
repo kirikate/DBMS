@@ -21,22 +21,18 @@ public partial class PizzaPlaceContext : DbContext
     public virtual DbSet<Coupon> Coupons { get; set; }
 
     public virtual DbSet<CouponsToOrder> CouponsToOrders { get; set; }
-
-    public virtual DbSet<CouponsToUserCart> CouponsToUserCarts { get; set; }
-
+    
     public virtual DbSet<Good> Goods { get; set; }
 
     public virtual DbSet<GoodsToCoupon> GoodsToCoupons { get; set; }
 
     public virtual DbSet<GoodsToOrder> GoodsToOrders { get; set; }
 
-    public virtual DbSet<GoodsToUserCart> GoodsToUserCarts { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
 
-    public virtual DbSet<Review> Reviews { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
     
@@ -120,29 +116,6 @@ public partial class PizzaPlaceContext : DbContext
                 .HasConstraintName("FK__CouponsTo__order__52593CB8");
         });
 
-        modelBuilder.Entity<CouponsToUserCart>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("CouponsToUserCart");
-
-            entity.HasIndex(e => e.UserId, "CouponsInUserCart");
-
-            entity.Property(e => e.Count)
-                .HasDefaultValueSql("((1))")
-                .HasColumnName("count");
-            entity.Property(e => e.CouponId).HasColumnName("couponId");
-            entity.Property(e => e.UserId).HasColumnName("userId");
-
-            entity.HasOne(d => d.Coupon).WithMany()
-                .HasForeignKey(d => d.CouponId)
-                .HasConstraintName("FK__CouponsTo__coupo__5AEE82B9");
-
-            entity.HasOne(d => d.User).WithMany()
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__CouponsTo__userI__59FA5E80");
-        });
-
         modelBuilder.Entity<Good>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Products__3213E83F10E0F018");
@@ -216,29 +189,6 @@ public partial class PizzaPlaceContext : DbContext
                 .HasConstraintName("FK__ProductsT__produ__4F7CD00D");
         });
 
-        modelBuilder.Entity<GoodsToUserCart>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("GoodsToUserCart");
-
-            entity.HasIndex(e => e.UserId, "ProductsInUserCart");
-
-            entity.Property(e => e.Count)
-                .HasDefaultValueSql("((1))")
-                .HasColumnName("count");
-            entity.Property(e => e.ProductId).HasColumnName("productId");
-            entity.Property(e => e.UserId).HasColumnName("userId");
-
-            entity.HasOne(d => d.Product).WithMany()
-                .HasForeignKey(d => d.ProductId)
-                .HasConstraintName("FK__ProductsT__produ__571DF1D5");
-
-            entity.HasOne(d => d.User).WithMany()
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__ProductsT__userI__5629CD9C");
-        });
-
         modelBuilder.Entity<Order>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Orders__3213E83FC9FE90E0");
@@ -286,33 +236,6 @@ public partial class PizzaPlaceContext : DbContext
                 .HasMaxLength(14)
                 .IsFixedLength()
                 .HasColumnName("type");
-        });
-
-        modelBuilder.Entity<Review>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Review__3213E83F3AF2EA34");
-
-            entity.ToTable("Review");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Date)
-                .HasColumnType("datetime")
-                .HasColumnName("date");
-            entity.Property(e => e.DateOfUpdate)
-                .HasColumnType("datetime")
-                .HasColumnName("dateOfUpdate");
-            entity.Property(e => e.Grade)
-                .HasDefaultValueSql("((5))")
-                .HasColumnName("grade");
-            entity.Property(e => e.Text)
-                .HasMaxLength(1000)
-                .HasColumnName("text");
-            entity.Property(e => e.UserId).HasColumnName("userId");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Reviews)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Review__userId__3E52440B");
         });
 
         modelBuilder.Entity<User>(entity =>

@@ -11,5 +11,6 @@ var app = builder.Build();
 app.UseMvc();
 app.UseStaticFiles();
 app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
+app.MapControllerRoute("ids", "{controller}/{action}/{id:int}");
 HttpContext context = new DefaultHttpContext();
 app.Run();

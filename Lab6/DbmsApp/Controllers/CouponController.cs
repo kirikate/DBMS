@@ -4,6 +4,7 @@ using DbmsApp.Models;
 using DbmsApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Elfie.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 namespace DbmsApp.Controllers;
 
@@ -21,7 +22,7 @@ public class CouponController: Controller
 	[HttpGet]
 	public IActionResult Index()
 	{
-		return View();
+		return RedirectToAction("Index", "Home");
 	}
 
 	[HttpPost]

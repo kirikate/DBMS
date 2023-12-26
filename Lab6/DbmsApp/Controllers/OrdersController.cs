@@ -21,8 +21,8 @@ public class OrdersController : Controller
 	public IActionResult Close(int id)
 	{
 		var now = DateTime.Now;
-		_db.Database.ExecuteSqlRaw($"UPDATE Orders SET dateOfDelivery = DATETIMEFROMPARTS(" +
-								$"{now.ToValues()}) FROM Orders WHERE id = {id}");
+		_db.Database.ExecuteSqlRaw($"UPDATE Orders SET dateOfDelivery = " +
+								$"{now.ToValues()} FROM Orders WHERE id = {id}");
 		
 
 		// Console.WriteLine($"UPDATE Orders SET dateOfDelivery = DATETIMEFROMPARTS(" +
@@ -39,8 +39,8 @@ public class OrdersController : Controller
 	{
 		//if((_us.IsAdmin))
 		//CHANGE
-		//var orders = _db.Orders.Where(ordr => ordr.DateOfDelivery == null).ToList();
-		var orders = _db.Orders.ToList();
+		var orders = _db.Orders.Where(ordr => ordr.DateOfDelivery == null).ToList();
+		//var orders = _db.Orders.ToList();
 		for(int i = 0; i < orders.Count; ++i)
 		{
 			orders[i].Address = _db.Addresses.FromSqlRaw($"SELECT * FROM Addresses WHERE id = {orders[i].AddressId}").First();

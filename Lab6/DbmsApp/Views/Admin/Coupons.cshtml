@@ -1,0 +1,38 @@
+@model List<(DbmsApp.Models.Coupon, List<(DbmsApp.Models.Good, int)>)>
+@{
+    ViewBag.Title = "Купоны Админ";
+}
+
+<h1>Купоны Админ</h1>
+@foreach (var (coupon, goods) in Model)
+{
+    <p>Номер: @coupon.Number</p>
+    <p>Цена: @coupon.Price</p>
+    <p>Содержимое: 
+        @foreach (var good in goods)
+        {
+            <span>@good.Item1.Product.Name @good.Item1.Size x @good.Item2, </span>
+        }
+    </p>
+    <p>Дата начала: @coupon.DateOfStart</p>
+    <p>Дата конца: @coupon.DateOfExpiration</p>
+    <a asp-action="CouponPage" asp-route-id="@coupon.Id"> Редактировать купон </a>
+    <a asp-action="DeleteCoupon" asp-route-id="@coupon.Id">Удалить купон</a>
+    <hr/>
+    
+}
+<form method="post">
+    <label for="Number">Купон № </label>
+    <input type="number" name="Number" min="1111" max="9999"></input>
+    <br/>
+    <label for="Price"> Цена </label>
+    <input type="number" name="Price"></input>
+    <br/>
+    <label for="DateOfStart">  Дата начала </label>
+    <input name="DateOfStart" type="date"/>
+    <br/>
+    <label for="DateOfExpiration"> Дата конца </label>
+    <input type="date" name="DateOfExpiration"></input>
+    <br/>
+    <button type="submit"> Добавить Купон</button>
+</form>

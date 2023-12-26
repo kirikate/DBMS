@@ -1,0 +1,28 @@
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model (DbmsApp.Models.Coupon, List<(DbmsApp.Models.Good, int)>, List<DbmsApp.Models.Good>)
+
+<p>Номер: @Model.Item1.Number</p>
+    <p>Цена: @Model.Item1.Price</p>
+    <p>Содержимое: 
+        @foreach (var good in Model.Item2)
+        {
+            <span>@good.Item1.Product.Name @good.Item1.Size x @good.Item2, </span>
+        }
+    </p>
+    <p>Дата начала: @Model.Item1.DateOfStart</p>
+    <p>Дата конца: @Model.Item1.DateOfExpiration</p>
+
+<form method="post">
+    <label for="good">Товар</label>
+    <select name="good">
+        @foreach (var good in Model.Item3)
+        {
+            <option value="@good.Id"> @good.Product.Name @good.Size</option>
+        }
+    </select>
+    <br/>
+    <label for="count"> Количество </label>
+    <input type="number" name="count" min="1" max="99"/>
+    <br/>
+    <button type="submit">Добавить в купон</button>
+</form>

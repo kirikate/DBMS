@@ -94,7 +94,8 @@ public class CartController : Controller
 		{
 			AddressId = smth.Id,
 			DateOfOrder = DateTime.Now,
-			UserId = _us.CurrentUser.Id
+			UserId = _us.CurrentUser.Id,
+			Price = 0
 		};
 		
 		var eo = _db.Orders.Add(ordr);
@@ -114,8 +115,9 @@ public class CartController : Controller
 			// 	Count = count
 			// };
 
-			_db.Database.ExecuteSqlRaw($"INSERT INTO GoodsToOrders(orderId, productId, count) " +
+			_db.Database.ExecuteSqlRaw($"INSERT INTO GoodsToOrders(orderId, productId, [count]) " +
 									$"VALUES ({eo.Entity.Id}, {goodId}, {count})");
+			_db.SaveChanges();
 			_db.Logs.Add(new Log()
 			{
 				Logg = $"{DateTime.Now} - INSERT INTO GoodsToOrders {eo.Entity.Id}, {goodId}, {count} IN Post Order"
@@ -123,7 +125,8 @@ public class CartController : Controller
 		}
 
 		_db.SaveChanges();
-
+		_us.GoodsInCart.Clear();
+		_us.GoodsInCart.Clear();
 		return Redirect("/");
 	}
 }

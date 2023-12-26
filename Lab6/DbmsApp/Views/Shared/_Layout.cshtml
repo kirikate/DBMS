@@ -5,7 +5,21 @@
     ViewBag.Title = "DefaultTitle";
     var us = Context.RequestServices.GetService<IUserService>();
     string username = "";
-    if(us.CurrentUser != null ) username = us.CurrentUser.FirstName + " " + us.CurrentUser.LastName;
+    bool isAdmin = false;
+    bool isStuff = false;
+    if (us.CurrentUser != null)
+    {
+        username = us.CurrentUser.FirstName + " " + us.CurrentUser.LastName;
+        if (us.CurrentUser.Role == "ADM")
+        {
+            isStuff = true;
+            isAdmin = true;
+        }
+        if (us.CurrentUser.Role == "STF")
+        {
+            isStuff = true;
+        }
+    }
 }
 <html>
 <head>
@@ -15,13 +29,26 @@
 <nav>
     <a asp-controller="Home" asp-action="Index"> Главная </a> |
     <a asp-controller="Catalog" asp-action="Index">Каталог</a>
-    <a asp-controller="Lists" asp-action="UsersList">Список Пользователей</a> | 
+    @*@if (isAdmin)*@
+    @*{*@
+        <a asp-controller="Lists" asp-action="UsersList"> Список Пользователей </a> 
+        <a asp-controller="Logs" asp-action="Index"> Логи </a> 
+    <a asp-controller="Admin" asp-action="Coupons"> Купоны </a>
+    @*}*@
+    | 
+    @* @if(!isStuff) *@
+    @* { *@
     <a asp-controller="Cart" asp-action="Index">Корзина</a>
-    <a asp-controller="Orders" asp-action="Index">Заказы</a>
-    <a asp-controller="Logs" asp-action="Index"> Логи </a>
+    <a asp-controller="Coupon" asp-action="Index">Добавить купон</a>
+    @* } *@
+    @* else *@
+    @* { *@
+        <a asp-controller="Orders" asp-action="Index">Заказы</a>
+    @* }    *@
+    
     @if (username.IsNullOrEmpty())
     {
-        <a asp-controller="Auth" asp-action="Login">Вход</a> 
+        <a asp-controller="Auth" asp-action="Login">Вход</a>
         <a asp-controller="Auth" asp-action="Register">Регистрация</a>
     }
     else

@@ -4,6 +4,7 @@
     <p>@ordr.User.FirstName @ordr.User.LastName</p>
     <p>@ordr.Address.Adress @ordr.Address.Number @ordr.Address.Entrance</p>
     <p>@ordr.DateOfOrder</p>
+    <p>@ordr.Price $</p>
     <p> Доставка @ordr.DateOfDelivery</p>
     <p><a asp-controller="Orders" asp-action="Close" asp-route-id="@ordr.Id">Закрыть заказ</a></p>
 }

@@ -14,8 +14,8 @@
 --	INSERT INTO Goods (price, size, productId) SELECT price, size, productId FROM inserted
 
 
-INSERT INTO Goods(price, size, productId) VALUES (1, N'RR', 10);
-SELECT * FROM Goods;
+--INSERT INTO Goods(price, size, productId) VALUES (1, N'RR', 10);
+--SELECT * FROM Goods;
 
 --CREATE TRIGGER checkSizeOfGood
 --ON Goods
@@ -47,10 +47,10 @@ SELECT * FROM Goods;
 --UPDATE Orders 
 --SET price = price + @priceOfIns
 
-
---SELECT * FROM Orders
---INSERT INTO GoodsToOrders(orderId, productId, [count]) VALUES (8, 5, 1)
---SELECT * FROM Orders
+ENABLE TRIGGER countPrices ON GoodsToOrders
+SELECT * FROM Orders
+INSERT INTO GoodsToOrders(orderId, productId, [count]) VALUES (8, 5, 1)
+SELECT * FROM Orders
 
 --CREATE TRIGGER addToCount ON GoodsToOrders
 --INSTEAD OF INSERT

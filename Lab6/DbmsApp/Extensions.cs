@@ -6,6 +6,14 @@ public static class Extensions
 {
 	public static string ToValues(this DateTime time)
 	{
-		return $"{time.Year}, {time.Month}, {time.Day}, {time.Hour}, {time.Minute}, 0 ,0";
+		return $"DATETIMEFROMPARTS({time.Year}, {time.Month}, {time.Day}, {time.Hour}, {time.Minute}, 0 ,0)";
+	}
+	
+	public static string ToValues(this DateTime? time)
+	{
+		if (time is null)
+			return "NULL";
+		
+		return $"DATETIMEFROMPARTS({time?.Year}, {time?.Month}, {time?.Day}, {time?.Hour}, {time?.Minute}, 0 ,0)";
 	}
 }
