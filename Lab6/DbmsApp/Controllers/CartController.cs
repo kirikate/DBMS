@@ -21,9 +21,12 @@ public class CartController : Controller
 	public IActionResult Index()
 	{
 		List<(Good, int)> lsg = new();
-		List<(Coupon, int)> lsc = new();
+		List<(Coupon, int, List<(Good, int)>)> lsc = new();
 		Console.WriteLine("From cart contr");
-		
+		if (!_us.GoodsInCart.Any(lol=> lol.Value > 0) && !_us.CouponsInCart.Any(lol=> lol.Value > 0))
+		{
+			return RedirectToAction("Index", "Catalog");
+		}
 		foreach ((var key, var value) in _us.GoodsInCart)
 		{
 			Console.WriteLine($"GoodId {key} - count = {value}");
@@ -41,7 +44,19 @@ public class CartController : Controller
 		{
 			if (count <= 0) continue; 
 			Coupon cp = _db.Coupons.Find(couponId);
-			lsc.Add((cp, count)!);
+			
+			List <(Good good, int count)> lst = new();
+			var gtc = _db.GoodsToCoupons.FromSqlRaw($"SELECT * FROM" +
+													$" GoodsToCoupons WHERE couponId={cp.Id}").ToList();
+
+			foreach (var it in gtc)
+			{
+				var good = _db.Goods.FromSqlRaw($"SELECT * FROM Goods WHERE id = {it.ProductId}").First();
+				good.Product = _db.Products.FromSqlRaw($"SELECT * FROM Products WHERE id={good.ProductId}").First();
+				lst.Add((good, it.Count));
+			}
+			
+			lsc.Add((cp, count, lst)!);
 		}
 		// foreach ((var good, var count) in lsg)
 		// {
@@ -63,12 +78,31 @@ public class CartController : Controller
 		_us.GoodsInCart[id] -= 1;
 		return RedirectToAction("Index");
 	}
-
+	
 	public IActionResult ClearOneProduct(int id)
 	{
 		_us.GoodsInCart[id] = 0;
 		return RedirectToAction("Index");
 	}
+
+	public IActionResult ClearOneCoupon(int id)
+	{
+		_us.CouponsInCart[id] = 0;
+		return RedirectToAction("Index");
+	}
+	
+	public IActionResult AddOneCouponTo(int id)
+	{
+		_us.CouponsInCart[id] += 1;
+		return RedirectToAction("Index");
+	}
+
+	public IActionResult RemoveOneCoupon(int id)
+	{
+		_us.CouponsInCart[id] -= 1;
+		return RedirectToAction("Index");
+	}
+
 
 	[HttpPost]
 	public IActionResult Index(string address, string? entrance, string? number)
@@ -108,12 +142,6 @@ public class CartController : Controller
 		Console.WriteLine($"id of new order is {eo.Entity.Id}");
 		foreach ((var goodId, var count) in _us.GoodsInCart)
 		{
-			// GoodsToOrder gto = new GoodsToOrder()
-			// {
-			// 	OrderId = eo.Entity.Id,
-			// 	ProductId = goodId,
-			// 	Count = count
-			// };
 
 			_db.Database.ExecuteSqlRaw($"INSERT INTO GoodsToOrders(orderId, productId, [count]) " +
 									$"VALUES ({eo.Entity.Id}, {goodId}, {count})");
@@ -121,6 +149,17 @@ public class CartController : Controller
 			_db.Logs.Add(new Log()
 			{
 				Logg = $"{DateTime.Now} - INSERT INTO GoodsToOrders {eo.Entity.Id}, {goodId}, {count} IN Post Order"
+			});
+		}
+
+		foreach ((var coupId, var count) in _us.CouponsInCart)
+		{
+			_db.Database.ExecuteSqlRaw($"INSERT INTO CouponsToOrders(orderId, couponId, [count]) " +
+										$"VALUES ({eo.Entity.Id}, {coupId}, {count})");
+			_db.SaveChanges();
+			_db.Logs.Add(new Log()
+			{
+				Logg = $"{DateTime.Now} - INSERT INTO CouponsToOrders {eo.Entity.Id}, {coupId}, {count} IN Post Order"
 			});
 		}
 

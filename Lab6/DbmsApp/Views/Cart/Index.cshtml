@@ -1,4 +1,4 @@
-@model (List<(DbmsApp.Models.Good, int)>, List<(DbmsApp.Models.Coupon, int)>)
+@model (List<(DbmsApp.Models.Good, int)>, List<(DbmsApp.Models.Coupon, int, List<(DbmsApp.Models.Good, int)>)>)
 
 @foreach ((var good, var count) in Model.Item1)
 {
@@ -12,25 +12,35 @@
         <a asp-controller="Cart" asp-action="RemoveOneProduct" asp-route-id="@good.Id">Уменьшить</a>
         <a asp-controller="Cart" asp-action="ClearOneProduct" asp-route-id="@good.Id">Убрать</a>
     </p>
-    <br/>
+    <hr/>
 }
 
-@foreach ((var coup, var count) in Model.Item2)
+@foreach ((var coup, var count, var goods) in Model.Item2)
 {
-    <p>@coup.Number </p>
+    <p>Купон номер @coup.Number * @count </p>
     <p>@coup.Price</p>
-    <p>@count</p>
-    <br/>
+    <p>
+        @foreach (var (good, count_) in goods)
+        {
+            <span>@good.Product.Name @good.Size x @count_, </span>
+        }
+    </p>
+    <p>
+        <a asp-controller="Cart" asp-action="AddOneCouponTo" asp-route-id="@coup.Id">Увеличить</a>
+        <a asp-controller="Cart" asp-action="RemoveOneCoupon" asp-route-id="@coup.Id">Уменьшить</a>
+        <a asp-controller="Cart" asp-action="ClearOneCoupon" asp-route-id="@coup.Id">Убрать</a>
+    </p>
+    <hr/>
 }
 
 <form method="post">
     <label for="address">Адрес</label>
     <input name="address" type="text"/>
     <br/>
-    <label for="entrance">Адрес</label>
+    <label for="entrance">Подъезд</label>
     <input name="entrance" type="text"/>
     <br/>
-    <label for="number">Адрес</label>
+    <label for="number">Номер квартиры</label>
     <input name="number" type="text"/>
     <br/>
     <button type="submit">Заказать</button>

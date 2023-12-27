@@ -12,6 +12,46 @@ public class AdminController : Controller
 	{
 		_db = db;
 	}
+
+	public IActionResult Users()
+	{
+		var users = _db.Users.FromSqlRaw("SELECT * FROM Users").ToList();
+		
+		return View(users);
+	}
+
+	public IActionResult MakeUsr(int id)
+	{
+		_db.Database.ExecuteSqlRaw($"UPDATE Users SET role = N'USR' WHERE id = {id}");
+		_db.Logs.Add(new Log()
+		{
+			Logg = $"{DateTime.Now} - Role of user {id} changed to USR"
+		});
+		_db.SaveChanges();
+		return RedirectToAction("Users");
+	}
+	
+	public IActionResult MakeStf(int id)
+	{
+		_db.Database.ExecuteSqlRaw($"UPDATE Users SET role = N'STF' WHERE id = {id}");
+		_db.Logs.Add(new Log()
+		{
+			Logg = $"{DateTime.Now} - Role of user {id} changed to STF"
+		});
+		_db.SaveChanges();
+		return RedirectToAction("Users");
+	}
+	
+	public IActionResult MakeAdm(int id)
+	{
+		_db.Database.ExecuteSqlRaw($"UPDATE Users SET role = N'ADM' WHERE id = {id}");
+		_db.Logs.Add(new Log()
+		{
+			Logg = $"{DateTime.Now} - Role of user {id} changed to STF"
+		});
+		_db.SaveChanges();
+		return RedirectToAction("Users");
+	}
 	
 	public IActionResult Coupons()
 	{
@@ -42,6 +82,7 @@ public class AdminController : Controller
 									$" ({coup.Number}, {coup.Price}, {coup.DateOfStart.ToValues()},"
 									+$"{coup.DateOfExpiration.ToValues()})");
 
+		_db.SaveChanges();
 		return RedirectToAction("Coupons");
 	}
 
@@ -72,6 +113,7 @@ public class AdminController : Controller
 			
 		}
 
+		_db.SaveChanges();
 		return View((coupon, lst, goods));
 	}
 	
@@ -96,7 +138,7 @@ public class AdminController : Controller
 		
 		_db.Database.ExecuteSqlRaw($"DELETE FROM GoodsToCoupons WHERE couponId={id}");
 		_db.Database.ExecuteSqlRaw($"DELETE FROM Coupons WHERE id={id}");
-
+		_db.SaveChanges();
 		return RedirectToAction("Coupons");
 	}
 }

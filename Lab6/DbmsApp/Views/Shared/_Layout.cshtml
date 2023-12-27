@@ -29,22 +29,23 @@
 <nav>
     <a asp-controller="Home" asp-action="Index"> Главная </a> |
     <a asp-controller="Catalog" asp-action="Index">Каталог</a>
-    @*@if (isAdmin)*@
-    @*{*@
+    @if (isAdmin)
+    {
         <a asp-controller="Lists" asp-action="UsersList"> Список Пользователей </a> 
         <a asp-controller="Logs" asp-action="Index"> Логи </a> 
-    <a asp-controller="Admin" asp-action="Coupons"> Купоны </a>
-    @*}*@
+        <a asp-controller="Admin" asp-action="Coupons"> Купоны Админ </a>
+        <a asp-controller="Admin" asp-action="Users">Юзера админ</a>
+    }
     | 
-    @* @if(!isStuff) *@
-    @* { *@
+    @if(!isStuff)
+    {
     <a asp-controller="Cart" asp-action="Index">Корзина</a>
     <a asp-controller="Coupon" asp-action="Index">Добавить купон</a>
-    @* } *@
-    @* else *@
-    @* { *@
+    }
+    else
+    {
         <a asp-controller="Orders" asp-action="Index">Заказы</a>
-    @* }    *@
+    }
     
     @if (username.IsNullOrEmpty())
     {

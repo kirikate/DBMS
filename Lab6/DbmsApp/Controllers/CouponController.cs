@@ -22,25 +22,32 @@ public class CouponController: Controller
 	[HttpGet]
 	public IActionResult Index()
 	{
-		return RedirectToAction("Index", "Home");
+		return View();
 	}
 
 	[HttpPost]
 	public IActionResult Index(int coup)
 	{
 		//CHANGE
-		var res = _db.Coupons.FirstOrDefault(coupon => coupon.Number == coup && coupon.DateOfExpiration >= DateTime.Now);
-		if (res is null) return RedirectToAction("Index");
-		
+		var res = _db.Coupons.FirstOrDefault(coupon => coupon.Number == coup && (coupon.DateOfExpiration >= DateTime.Now));
+		if (res is null)
+		{
+			res = _db.Coupons.FirstOrDefault(coupon => coupon.Number == coup && coupon.DateOfExpiration == null);
+			if (res is null)
+			{
+				return RedirectToAction("Index");
+			}
+		}
+		Console.WriteLine(res);
 		try
 		{
-			_us.GoodsInCart[res.Id] += 1;
+			_us.CouponsInCart[res.Id] += 1;
 		}
 		catch (KeyNotFoundException)
 		{
-			_us.GoodsInCart[res.Id] = 1;
+			_us.CouponsInCart[res.Id] = 1;
 		}
 
-		return RedirectToAction("Index", "Cart");
+		return RedirectToAction("Index");
 	}
 }

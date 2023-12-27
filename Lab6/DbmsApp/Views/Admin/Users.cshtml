@@ -1,18 +1,14 @@
-@model TModel
+@model List<DbmsApp.Models.User>
 
-@{
-    Layout = null;
+<h1>Пользователей редактирование</h1>
+@foreach (var user in Model)
+{
+    <p>@user.FirstName @user.LastName</p>
+    <p>@user.Email</p>
+    <p>+375 @user.Phone</p>
+    <p>@user.Role</p>
+    <a asp-action="MakeStf" asp-route-id="@user.Id"> Сделать сотрудником</a>
+    <a asp-action="MakeUsr" asp-route-id="@user.Id">Сделать обычным пользователем</a>
+    <a asp-action="MakeAdm" asp-route-id="@user.Id">Сделать Админом</a>
+    <hr/>
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
-</div>
-</body>
-</html>
