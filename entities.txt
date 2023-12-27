@@ -22,16 +22,6 @@ OrdersToCoupons
 +Coupon: REFEFRENCE Coupon(id)
 +count: INT NOT_NULL
 
-ProductsToUsersCart:
-+userid: REFERRENCE(Users)
-+Product: REFERENCE(Product)
-+Count: INT NOT_NULL
-
-CouponsToUsersCart:
-+userid: REFERRENCE(Users)
-+Couponid: REFERENCE(Coupons)
-+Count: INT NOT_NULL
-
 Order(MtM with Product, MtM with Coupons):
 +id: BIGINT PRIMARY KEY
 +user: REFERENCE User(id)
@@ -48,12 +38,6 @@ Product:
 +size: CHAR(3) NULL
 +ingridients: NCHAR(100)
 
-Review
-+id: BIGINT PRIMARY KEY
-+user: References User(id)
-+date: DATETIME
-+dateOfUpdate: DATETIME NULL
-+text:NVARCHAR(1000)
 
 Coupon (MtM with products):
 +id: BIGINT PRIMARY KEY

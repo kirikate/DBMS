@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-12-26T19:59:48.252Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 OPR/104.0.0.0" etag="BwzUIdpFAi8GIaeiCN0d" version="22.1.11" type="device">
+<mxfile host="app.diagrams.net" modified="2023-12-27T12:56:29.044Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 OPR/104.0.0.0" etag="JYT7LT9s__4dwKZaWep4" version="22.1.11" type="device">
   <diagram name="Страница — 1" id="j8NeaPQq4FaoW0YNu0MQ">
-    <mxGraphModel dx="1836" dy="1719" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3069" dy="2391" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -47,12 +47,6 @@
         <mxCell id="GTcmixg37_vYdclQBQrY-21" value="+number&lt;br&gt;+price&lt;br&gt;+dateOfStart&lt;br&gt;+dtaeOfInspiration" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="GTcmixg37_vYdclQBQrY-20" vertex="1">
           <mxGeometry y="30" width="160" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="GTcmixg37_vYdclQBQrY-25" value="Review" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="800" y="80" width="160" height="100" as="geometry" />
-        </mxCell>
-        <mxCell id="GTcmixg37_vYdclQBQrY-26" value="+user&lt;br&gt;+date&lt;br&gt;+dateOfUpdate&lt;br&gt;+text" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" parent="GTcmixg37_vYdclQBQrY-25" vertex="1">
-          <mxGeometry y="30" width="160" height="70" as="geometry" />
-        </mxCell>
         <mxCell id="GTcmixg37_vYdclQBQrY-27" value="Adress" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry y="10" width="160" height="160" as="geometry" />
         </mxCell>
@@ -94,25 +88,6 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="GTcmixg37_vYdclQBQrY-34" value="Included" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="GTcmixg37_vYdclQBQrY-32" vertex="1" connectable="0">
-          <mxGeometry x="-0.7037" y="-1" relative="1" as="geometry">
-            <mxPoint y="15" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="GTcmixg37_vYdclQBQrY-35" value="" style="fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;edgeStyle=elbowEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1.014;exitY=0.417;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="s82BNTiHbq3g5wNBVeE_-2" target="GTcmixg37_vYdclQBQrY-26" edge="1">
-          <mxGeometry width="100" height="100" relative="1" as="geometry">
-            <mxPoint x="660" y="435" as="sourcePoint" />
-            <mxPoint x="840" y="340" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="700" y="190" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="GTcmixg37_vYdclQBQrY-36" value="Contains" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="GTcmixg37_vYdclQBQrY-35" vertex="1" connectable="0">
-          <mxGeometry x="0.7255" y="-1" relative="1" as="geometry">
-            <mxPoint x="-3" y="-16" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="GTcmixg37_vYdclQBQrY-37" value="Included" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="GTcmixg37_vYdclQBQrY-35" vertex="1" connectable="0">
           <mxGeometry x="-0.7037" y="-1" relative="1" as="geometry">
             <mxPoint y="15" as="offset" />
           </mxGeometry>

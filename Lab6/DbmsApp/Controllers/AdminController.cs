@@ -19,7 +19,7 @@ public class AdminController : Controller
 		
 		return View(users);
 	}
-
+	
 	public IActionResult MakeUsr(int id)
 	{
 		_db.Database.ExecuteSqlRaw($"UPDATE Users SET role = N'USR' WHERE id = {id}");
