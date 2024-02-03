@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DbmsApp.Controllers;
 using Microsoft.EntityFrameworkCore;
 using DbmsApp.Models;
 
@@ -27,7 +28,8 @@ public partial class PizzaPlaceContext : DbContext
     public virtual DbSet<GoodsToCoupon> GoodsToCoupons { get; set; }
 
     public virtual DbSet<GoodsToOrder> GoodsToOrders { get; set; }
-
+    
+    public virtual DbSet<ReadableGood> ReadableGoods { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
 
@@ -43,6 +45,7 @@ public partial class PizzaPlaceContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ReadableGood>().ToView("ReadableGoods");
         modelBuilder.Entity<Address>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Addresse__3213E83F1BA3A112");
@@ -215,7 +218,7 @@ public partial class PizzaPlaceContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Orders__userId__46E78A0C");
         });
-
+        modelBuilder.Entity<CatalogController.GoodDto>();   
         modelBuilder.Entity<Product>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Products__3213E83F24E2B502");

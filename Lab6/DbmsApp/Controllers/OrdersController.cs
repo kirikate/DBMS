@@ -21,17 +21,9 @@ public class OrdersController : Controller
 	public IActionResult Close(int id)
 	{
 		var now = DateTime.Now;
-		_db.Database.ExecuteSqlRaw($"UPDATE Orders SET dateOfDelivery = " +
-								$"{now.ToValues()} FROM Orders WHERE id = {id}");
-		
 
-		// Console.WriteLine($"UPDATE Orders SET dateOfDelivery = DATETIMEFROMPARTS(" +
-		// 				$"{now.ToValues()}) FROM Orders WHERE id = {id}");
-		
-		_db.Logs.Add(new Log()
-		{
-			Logg = $"{DateTime.Now} - ORDER N {id} IS CLOSED"
-		});
+		_db.Database.ExecuteSqlRaw($"EXEC CloseOrder @orderId={id}");
+
 		_db.SaveChanges();
 		return RedirectToAction("Index");
 	}
@@ -39,7 +31,9 @@ public class OrdersController : Controller
 	{
 		//if((_us.IsAdmin))
 		//CHANGE
-		var orders = _db.Orders.Where(ordr => ordr.DateOfDelivery == null).ToList();
+		// var orders = _db.Orders.FromSqlRaw(ordr => ordr.DateOfDelivery == null).ToList();
+		var orders = _db.Orders.FromSqlRaw($"SELECT * FROM Orders WHERE dateOfDelivery IS NULL").ToList();
+
 		//var orders = _db.Orders.ToList();
 		for(int i = 0; i < orders.Count; ++i)
 		{

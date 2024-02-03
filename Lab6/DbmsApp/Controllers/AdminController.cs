@@ -23,10 +23,8 @@ public class AdminController : Controller
 	public IActionResult MakeUsr(int id)
 	{
 		_db.Database.ExecuteSqlRaw($"UPDATE Users SET role = N'USR' WHERE id = {id}");
-		_db.Logs.Add(new Log()
-		{
-			Logg = $"{DateTime.Now} - Role of user {id} changed to USR"
-		});
+		_db.Database.ExecuteSqlRaw(
+			$"INSERT INTO Logs([log]) VALUES (FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss') + N' - Role of user {id} changed to USR'");
 		_db.SaveChanges();
 		return RedirectToAction("Users");
 	}
@@ -34,10 +32,8 @@ public class AdminController : Controller
 	public IActionResult MakeStf(int id)
 	{
 		_db.Database.ExecuteSqlRaw($"UPDATE Users SET role = N'STF' WHERE id = {id}");
-		_db.Logs.Add(new Log()
-		{
-			Logg = $"{DateTime.Now} - Role of user {id} changed to STF"
-		});
+		_db.Database.ExecuteSqlRaw(
+			$"INSERT INTO Logs([log]) VALUES (FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss') + N' - Role of user {id} changed to STF'");
 		_db.SaveChanges();
 		return RedirectToAction("Users");
 	}
@@ -45,10 +41,8 @@ public class AdminController : Controller
 	public IActionResult MakeAdm(int id)
 	{
 		_db.Database.ExecuteSqlRaw($"UPDATE Users SET role = N'ADM' WHERE id = {id}");
-		_db.Logs.Add(new Log()
-		{
-			Logg = $"{DateTime.Now} - Role of user {id} changed to STF"
-		});
+		_db.Database.ExecuteSqlRaw(
+			$"INSERT INTO Logs([log]) VALUES (FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss') + N' - Role of user {id} changed to ADM'");
 		_db.SaveChanges();
 		return RedirectToAction("Users");
 	}

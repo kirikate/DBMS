@@ -54,9 +54,10 @@
     }
     else
     {
+        <a asp-controller="User" asp-action="Index">@username</a>
         <a asp-controller="Auth" asp-action="Logout">Выход</a>
     }
-    <span>@username</span>
+    <span></span>
 </nav>
 <div>
     @RenderBody()

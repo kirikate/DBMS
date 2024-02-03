@@ -122,7 +122,9 @@ public class CartController : Controller
 			$"INSERT INTO Addresses(adress, entrance, number, userId) " + 
 			$"VALUES({addr.Adress}, {addr.Entrance}, {addr.Number}, {_us.CurrentUser.Id})");
 		_db.SaveChanges();
-		var smth = _db.Addresses.First(addr => addr.UserId == _us.CurrentUser.Id && addr.Adress == address);
+		//var smth = _db.Addresses.First(addr => addr.UserId == _us.CurrentUser.Id && addr.Adress == address);
+		var smth = _db.Addresses.FromSqlRaw($"SELECT * FROM Addresses WHERE userId={_us.CurrentUser.Id}" +
+											$" AND adress={address}").First();
 		Console.WriteLine($"id of new address {smth.Id}");
 		var ordr = new Order()
 		{
@@ -131,36 +133,28 @@ public class CartController : Controller
 			UserId = _us.CurrentUser.Id,
 			Price = 0
 		};
-		
-		var eo = _db.Orders.Add(ordr);
-		_db.Logs.Add(new Log()
-		{
-			Logg = $"{DateTime.Now} - INSERT INTO ORDERS usr {_us.CurrentUser.Id} Address N{smth.Id} IN Post Order"
-		});
+		_db.Database.ExecuteSqlRaw($"INSERT INTO Orders(userId, dateOfOrder, dateOfDelivery, price, addressId) " +
+									$"VALUES ({ordr.UserId}, {ordr.DateOfOrder.ToValues()}, NULL, 0, {ordr.AddressId})");
+		//var eo = _db.Orders.Add(ordr);
+		var eo = _db.Orders.FromSqlRaw($"SELECT * FROM Orders WHERE userId = {ordr.UserId} " +
+										$"AND dateOfOrder={ordr.DateOfOrder.ToValues()}").First();
+
 		_db.SaveChanges();
 		Console.WriteLine("Is there anybody here...");
-		Console.WriteLine($"id of new order is {eo.Entity.Id}");
+		Console.WriteLine($"id of new order is {eo.Id}");
 		foreach ((var goodId, var count) in _us.GoodsInCart)
 		{
 
 			_db.Database.ExecuteSqlRaw($"INSERT INTO GoodsToOrders(orderId, productId, [count]) " +
-									$"VALUES ({eo.Entity.Id}, {goodId}, {count})");
+									$"VALUES ({eo.Id}, {goodId}, {count})");
 			_db.SaveChanges();
-			_db.Logs.Add(new Log()
-			{
-				Logg = $"{DateTime.Now} - INSERT INTO GoodsToOrders {eo.Entity.Id}, {goodId}, {count} IN Post Order"
-			});
 		}
 
 		foreach ((var coupId, var count) in _us.CouponsInCart)
 		{
 			_db.Database.ExecuteSqlRaw($"INSERT INTO CouponsToOrders(orderId, couponId, [count]) " +
-										$"VALUES ({eo.Entity.Id}, {coupId}, {count})");
+										$"VALUES ({eo.Id}, {coupId}, {count})");
 			_db.SaveChanges();
-			_db.Logs.Add(new Log()
-			{
-				Logg = $"{DateTime.Now} - INSERT INTO CouponsToOrders {eo.Entity.Id}, {coupId}, {count} IN Post Order"
-			});
 		}
 
 		_db.SaveChanges();

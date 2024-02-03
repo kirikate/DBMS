@@ -33,10 +33,8 @@ public class UserService: IUserService
 	{
 		//CHANGE
 		User? usr = db.Users.FromSqlRaw($"SELECT * FROM Users WHERE email=N'{email}' AND password={password}").First();
-		db.Logs.Add(new Log()
-		{
-			Logg = $"{DateTime.Now} - SELECT FROM USERS FOR LOGIN {email}"
-		});
+		db.Database.ExecuteSqlRaw(
+			$"INSERT INTO Logs([log]) VALUES (FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss') + N' - SELECT FROM USERS FOR LOGIN {email}')");
 		db.SaveChanges();
 		if (usr is null) return false;
 
@@ -56,11 +54,22 @@ public class UserService: IUserService
 
 	public bool Register(User user, PizzaPlaceContext db)
 	{
-		User? usr = db.Users.FromSqlRaw($"SELECT * FROM Users WHERE email=N'{user.Email}' AND password={user.Password}").First();
-		if (usr != null) return false;
-
+		var usr = db.Users.FromSqlRaw($"SELECT * FROM Users WHERE email=N'{user.Email}' AND password={user.Password}");
+		if (usr.Any())
+		{
+			Console.WriteLine($"EMAIL занят {user.Email} {user.Password} {usr.Count()}");
+			return false;
+		}
+		
 		//CHANGE
-		db.Users.Add(user);
+		Console.WriteLine($"INSERT INTO Users(first_name, last_name, password, email, role, phone) " +
+						$"VALUES (N'{user.FirstName}', N'{user.LastName}', {user.Password}, " +
+						$"N'{user.Email}', N'USR', '{user.Phone}')");
+		db.Database.ExecuteSqlRaw($"INSERT INTO Users(first_name, last_name, password, email, role, phone) " +
+								$"VALUES (N'{user.FirstName}', N'{user.LastName}', {user.Password}, " +
+								$"N'{user.Email}', N'USR', N'{user.Phone}')");
+
+		//db.Users.Add(user);
 		db.Logs.Add(new Log()
 		{
 			Logg = $"{DateTime.Now} - INSERT INTO Users object {user.Email} {user.FirstName} {user.LastName}"

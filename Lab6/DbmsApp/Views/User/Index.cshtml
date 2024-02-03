@@ -1,0 +1,24 @@
+@using DbmsApp.Services
+@model DbmsApp.Controllers.UserController.UserDataModel
+@{
+    ViewBag.Title = "DefaultTitle";
+    var us = Context.RequestServices.GetService<IUserService>();
+    var user = us.CurrentUser;
+}
+<h2>Данные пользователя</h2>
+<form method="post" asp>
+    <label asp-for="FirstName">Имя</label>
+    <input asp-for="FirstName" value="@user.FirstName"/>
+    <br/>
+    <label asp-for="LastName">Фамилия</label>
+    <input asp-for="LastName" value="@user.LastName"/>
+    <br/>
+    <label asp-for="Email">Почта</label>
+    <input asp-for="Email" value="@user.Email"/>
+    <br/>
+    <label asp-for="Phone">Телефон</label>
+    <input asp-for="Phone" value="@user.Phone"/>
+    <br/>
+    <button type="submit">Изменить</button>
+</form>
+
